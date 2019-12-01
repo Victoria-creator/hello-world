@@ -1,7 +1,6 @@
 import io
 import numpy as np
 import pickle
-import  math
 
 FILE = "/Users/user/Downloads/cc.en.300.vec"
 
@@ -14,51 +13,23 @@ FILE = "/Users/user/Downloads/cc.en.300.vec"
 #     for line in fin:
 #         tokens = line.rstrip().split(' ')
 #         # if tokens[0] in good or tokens[0] in bad:  # only words in lists
-#         data[tokens[0]] = map(float, np.array(tokens[1:]))
+#         data[tokens[0]] = np.array(list(map(float, np.array(tokens[1:]))))
 #         # l_count += 1
 #         # print(np.array(tokens[1:]))
 #     return data
-#
-#
+# 
+# 
 # word2vec = load_vectors(FILE)
-#
-# # print(word2vec['nice'])  # слово - вектор
-#
-# word2vec_n_tr_dict = {}
-# with open("/Users/user/Downloads/word2phones.pkl", "rb") as out_file:
-#     word2tr = pickle.load(out_file)
-#
-# # print(word2tr['nice'])  # слово - транскрипция
-#
-# for word in word2tr.keys():
-#     try:
-#         word2vec_n_tr_dict[word] = (word2vec[word], word2tr[word])
-#     except:
-#         # pass
-#         print(word)
-#
-# print(word2vec_n_tr_dict.get('nice', None))
 
-# with open("word2vectranscr.pkl", "wb") as out_file:
-#   pickle.dump(word2vec_n_tr_dict, out_file, protocol=pickle.HIGHEST_PROTOCOL)
-
-with open("word2vectranscr.pkl", "rb") as out_file:
-    word2vectranscr = pickle.load(out_file)
-# print(word2vectranscr)
-
-word2vectranscr = {word: (np.array(list(vec)), trans)
-                   for
-                   word, (vec, trans)
-                   in
-                   word2vectranscr.items()}
-
-synonyms = {'Angular': ['jagged' ,'V-shaped', 'Y-shaped', 'akimbo', 'bifurcate', 'cornered', 'crooked', 'crossing',
+synonyms = {'Angular': ['jagged', 'V-shaped', 'Y-shaped', 'akimbo', 'bifurcate', 'cornered', 'crooked', 'crossing',
                         'crotched', 'divaricate', 'forked', 'intersecting', 'oblique', 'sharp-cornered', 'skewed',
                         'slanted'],
+
             'Round': ['bulbous', 'curled', 'curved', 'cylindrical', 'elliptical', 'oval', 'rounded', 'spherical',
                       'arced', 'arched', 'bent', 'bowed', 'circular', 'coiled', 'looped', 'orbed', 'ringed', 'spheroid',
                       'spiral', 'annular', 'arciform', 'curvilinear', 'discoid', 'disk-shaped', 'domical', 'egg-shaped',
                       'globose', 'globular', 'orbicular', 'orbiculate', 'rotund'],
+
             'Bad': ['atrocious', 'awful', 'cheap', 'crummy', 'dreadful', 'lousy', 'poor', 'rough', 'sad',
                     'unacceptable', 'blah', 'bummer', 'diddly', 'downer', 'garbage', 'gross', 'imperfect', 'inferior',
                     'junky', 'synthetic', 'abominable', 'amiss', 'bad news', 'beastly', 'bottom out', 'careless',
@@ -321,6 +292,55 @@ synonyms = {'Angular': ['jagged' ,'V-shaped', 'Y-shaped', 'akimbo', 'bifurcate',
 
 # print(word2vectranscr['easy'])
 
+# axes2vec = {}
+# for item in synonyms.items():
+#     sum = np.zeros((300))
+#     for word in item[1]:
+#         try:
+#             sum += np.array(list(word2vec[word]))
+#         except:
+#             print(word)
+#     axes2vec[item[0]] = sum
+# 
+# 
+# print(axes2vec)
+# with open("axec2vec", "wb") as out_file:
+#     pickle.dump(axes2vec, out_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open("axes2vec.pkl", "rb") as out_file:
+    axes2vec = pickle.load(out_file)
+
+# # print(word2vec['nice'])  # слово - вектор
+#
+# word2vec_n_tr_dict = {}
+# with open("/Users/user/Downloads/word2phones.pkl", "rb") as out_file:
+#     word2tr = pickle.load(out_file)
+#
+# # print(word2tr['nice'])  # слово - транскрипция
+#
+# for word in word2tr.keys():
+#     try:
+#         word2vec_n_tr_dict[word] = (word2vec[word], word2tr[word])
+#     except:
+#         # pass
+#         print(word)
+#
+# print(word2vec_n_tr_dict.get('nice', None))
+
+# with open("word2vectranscr.pkl", "wb") as out_file:
+#   pickle.dump(word2vec_n_tr_dict, out_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open("word2vectranscr.pkl", "rb") as out_file:
+    word2vectranscr = pickle.load(out_file)
+# print(word2vectranscr)
+
+word2vectranscr = {word: (np.array(list(vec)), trans)
+                   for
+                   word, (vec, trans)
+                   in
+                   word2vectranscr.items()}
+
+
 axes2vec = {}
 for item in synonyms.items():
     sum = np.zeros((300))
@@ -332,7 +352,6 @@ for item in synonyms.items():
     axes2vec[item[0]] = sum
 
 print(axes2vec)
-
 exit()
 
 axes = {
@@ -343,7 +362,7 @@ axes = {
             'Cowardly - Brave': (-(axes2vec['Cowardly']) + axes2vec['Brave']),
             'Dangerous - Secure': (-(axes2vec['Dangerous']) + axes2vec['Secure']),
             'Dark - Luminous': (-(axes2vec['Dark']) + axes2vec['Luminous']),
-            'Difﬁcult - Easy': (-(axes2vec['Difﬁcult']) + axes2vec['Easy']),
+            'Difficult - Easy': (-(axes2vec['Difficult']) + axes2vec['Easy']),
             'Evil - Benign': (-(axes2vec['Evil']) + axes2vec['Benign']),
             'Faded - Bright': (-(axes2vec['Faded']) + axes2vec['Bright']),
             'Feeble - Strong': (-(axes2vec['Feeble']) + axes2vec['Strong']),
@@ -421,3 +440,4 @@ for sound in sounds:
             axis_distributions.append(cosine_list)
         print('{} - {} Dist lens: {} {} {}'.format(sound, axis_name, len(axis_distributions[0]), len(axis_distributions[1]), len(axis_distributions[2])))
         projection_axis[sound][axis_name] = axis_distributions
+
