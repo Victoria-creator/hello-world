@@ -1,10 +1,11 @@
 import io
 import numpy as np
 import pickle
+import scipy.stats as stats
 
 FILE = "/Users/user/Downloads/cc.en.300.vec"
 
-
+#
 # def load_vectors(fname):
 #     fin = io.open(fname, 'r', encoding='utf-8', newline='\n', errors='ignore')
 #     # n, word2vec = map(int, fin.readline().split())
@@ -17,8 +18,8 @@ FILE = "/Users/user/Downloads/cc.en.300.vec"
 #         # l_count += 1
 #         # print(np.array(tokens[1:]))
 #     return data
-# 
-# 
+#
+#
 # word2vec = load_vectors(FILE)
 
 synonyms = {'Angular': ['jagged', 'V-shaped', 'Y-shaped', 'akimbo', 'bifurcate', 'cornered', 'crooked', 'crossing',
@@ -291,7 +292,7 @@ synonyms = {'Angular': ['jagged', 'V-shaped', 'Y-shaped', 'akimbo', 'bifurcate',
                           'statuesque', 'sublime', 'symmetrical', 'taking', 'well-formed']}
 
 # print(word2vectranscr['easy'])
-
+#
 # axes2vec = {}
 # for item in synonyms.items():
 #     sum = np.zeros((300))
@@ -301,13 +302,14 @@ synonyms = {'Angular': ['jagged', 'V-shaped', 'Y-shaped', 'akimbo', 'bifurcate',
 #         except:
 #             print(word)
 #     axes2vec[item[0]] = sum
-# 
-# 
+
+
 # print(axes2vec)
-# with open("axec2vec", "wb") as out_file:
+# with open("axes2vec.pkl", "wb") as out_file:
 #     pickle.dump(axes2vec, out_file, protocol=pickle.HIGHEST_PROTOCOL)
 
-with open("axes2vec.pkl", "rb") as out_file:
+
+with open("/Users/user/Downloads/axes2vec.pkl", "rb") as out_file:
     axes2vec = pickle.load(out_file)
 
 # # print(word2vec['nice'])  # слово - вектор
@@ -351,8 +353,8 @@ for item in synonyms.items():
             print(word)
     axes2vec[item[0]] = sum
 
-print(axes2vec)
-exit()
+# print(axes2vec)
+
 
 axes = {
            'Angular - Round': (-(axes2vec['Angular']) + axes2vec['Round']),
@@ -415,8 +417,6 @@ for sound in sounds:
 #     pass
 #
 
-
-
 cos_vec = {}
 sum_vec = 0
 sum_axis = 0
@@ -424,20 +424,25 @@ sum_axis = 0
 projection_axis = {}
 for sound in sounds:
     projection_axis[sound] = {}
-    for axis_name, axis_vec in axes.items():  # берем оси которых 21
+    for axis_name, axis_vec in axes.items():
         len_axis = np.linalg.norm(axis_vec)
         axis = axis_vec / len_axis
         axis_distributions = []
-        for distribution in sound2word[sound]:
+         for distribution in sound2word[sound]:
             cosine_list = []
-            for word in distribution:  # берем слова-вектора, но нам надо взять вектора
+            for word in distribution:
                 word_vec = word2vectranscr[word][0]
                 len_vec = np.linalg.norm(word_vec)
                 vec = word_vec / len_vec
 
-                cosine_between_vectors = np.dot(vec, axis)  # косинус угла
+                cosine_between_vectors = np.dot(vec, axis)
                 cosine_list.append(cosine_between_vectors)
             axis_distributions.append(cosine_list)
-        print('{} - {} Dist lens: {} {} {}'.format(sound, axis_name, len(axis_distributions[0]), len(axis_distributions[1]), len(axis_distributions[2])))
+        # print('{} - {} Dist lens: {} {} {}'.format(sound, axis_name, len(axis_distributions[0]), len(axis_distributions[1]), len(axis_distributions[2])))
         projection_axis[sound][axis_name] = axis_distributions
 
+        f_w = stats.mannwhitneyu(axis_distributions[0], axis_distributions[1])[1]
+        print(f_w)
+        w_wo = stats.mannwhitneyu(axis_distributions[1], axis_distributions[2])[1]
+        wo_f = stats.mannwhitneyu(axis_distributions[2], axis_distributions[0])[1]
+        print('{} - {} p-value: {} {} {}'.format(sound, axis_name, f_w, w_wo, wo_f))
