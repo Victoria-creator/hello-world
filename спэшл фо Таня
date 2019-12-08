@@ -343,15 +343,15 @@ word2vectranscr = {word: (np.array(list(vec)), trans)
                    word2vectranscr.items()}
 
 
-axes2vec = {}
-for item in synonyms.items():
-    sum = np.zeros((300))
-    for word in item[1]:
-        try:
-            sum += np.array(list(word2vectranscr[word][0]))
-        except:
-            print(word)
-    axes2vec[item[0]] = sum
+#axes2vec = {}
+#for item in synonyms.items():
+ #   sum = np.zeros((300))
+  #  for word in item[1]:
+   #     try:
+    #        sum += np.array(list(word2vectranscr[word][0]))
+     #   except:
+      #      print(word)
+   # axes2vec[item[0]] = sum
 
 # print(axes2vec)
 
@@ -428,7 +428,7 @@ for sound in sounds:
         len_axis = np.linalg.norm(axis_vec)
         axis = axis_vec / len_axis
         axis_distributions = []
-         for distribution in sound2word[sound]:
+        for distribution in sound2word[sound]:
             cosine_list = []
             for word in distribution:
                 word_vec = word2vectranscr[word][0]
