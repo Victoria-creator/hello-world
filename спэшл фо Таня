@@ -343,15 +343,15 @@ word2vectranscr = {word: (np.array(list(vec)), trans)
                    word2vectranscr.items()}
 
 
-#axes2vec = {}
-#for item in synonyms.items():
- #   sum = np.zeros((300))
-  #  for word in item[1]:
-   #     try:
-    #        sum += np.array(list(word2vectranscr[word][0]))
-     #   except:
-      #      print(word)
-   # axes2vec[item[0]] = sum
+# axes2vec = {}
+# for item in synonyms.items():
+#     sum = np.zeros((300))
+#     for word in item[1]:
+#         try:
+#             sum += np.array(list(word2vectranscr[word][0]))
+#         except:
+#             print(word)
+#     axes2vec[item[0]] = sum
 
 # print(axes2vec)
 
@@ -440,9 +440,15 @@ for sound in sounds:
             axis_distributions.append(cosine_list)
         # print('{} - {} Dist lens: {} {} {}'.format(sound, axis_name, len(axis_distributions[0]), len(axis_distributions[1]), len(axis_distributions[2])))
         projection_axis[sound][axis_name] = axis_distributions
-
-        f_w = stats.mannwhitneyu(axis_distributions[0], axis_distributions[1])[1]
-        print(f_w)
-        w_wo = stats.mannwhitneyu(axis_distributions[1], axis_distributions[2])[1]
-        wo_f = stats.mannwhitneyu(axis_distributions[2], axis_distributions[0])[1]
+        if len(axis_distributions[0]) > 20 and len(axis_distributions[1]) > 20:
+            f_w = stats.mannwhitneyu(axis_distributions[0], axis_distributions[1])[1]
+        if len(axis_distributions[1]) > 20 and len(axis_distributions[2]) > 20:
+            w_wo = stats.mannwhitneyu(axis_distributions[1], axis_distributions[2])[1]
+        if len(axis_distributions[2]) > 20 and len(axis_distributions[0]) > 20:
+            wo_f = stats.mannwhitneyu(axis_distributions[2], axis_distributions[0])[1]
         print('{} - {} p-value: {} {} {}'.format(sound, axis_name, f_w, w_wo, wo_f))
+
+
+
+
+
