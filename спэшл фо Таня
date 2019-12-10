@@ -2,6 +2,7 @@ import io
 import numpy as np
 import pickle
 import scipy.stats as stats
+import matplotlib.pyplot as plt
 
 FILE = "/Users/user/Downloads/cc.en.300.vec"
 
@@ -447,8 +448,30 @@ for sound in sounds:
         if len(axis_distributions[2]) > 20 and len(axis_distributions[0]) > 20:
             wo_f = stats.mannwhitneyu(axis_distributions[2], axis_distributions[0])[1]
         print('{} - {} p-value: {} {} {}'.format(sound, axis_name, f_w, w_wo, wo_f))
+        if sound == "ə" and axis_name == "Rough - Tender":
+            plt.hist(axis_distributions[0], 100, alpha=0.5)
+            plt.hist(axis_distributions[1], 100, alpha=0.5)
+            plt.hist(axis_distributions[2], 100, alpha=0.5)
+            plt.show()
+            plt.clf()
 
+        if sound == "ʌ" and axis_name == "Bad - Good":
+            plt.hist(axis_distributions[0], 100, alpha=0.5)
+            plt.hist(axis_distributions[1], 100, alpha=0.5)
+            plt.hist(axis_distributions[2], 100, alpha=0.5)
+            plt.show()
+            plt.clf()
 
+        if sound == "ʌ" and axis_name == "Dangerous - Secure":
+            plt.hist(axis_distributions[0], 100, alpha=0.5)
+            plt.hist(axis_distributions[1], 100, alpha=0.5)
+            plt.hist(axis_distributions[2], 100, alpha=0.5)
+            plt.show()
+            plt.clf()
 
-
-
+        if sound == "ʌ" and axis_name == "Evil - Benign":
+            plt.hist(axis_distributions[0], 100, alpha=0.5)
+            plt.hist(axis_distributions[1], 100, alpha=0.5)
+            plt.hist(axis_distributions[2], 100, alpha=0.5)
+            plt.show()
+            plt.clf()
