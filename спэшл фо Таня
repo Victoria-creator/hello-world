@@ -3,6 +3,7 @@ import numpy as np
 import pickle
 import scipy.stats as stats
 import matplotlib.pyplot as plt
+import csv
 
 FILE = "/Users/user/Downloads/cc.en.300.vec"
 
@@ -357,7 +358,8 @@ word2vectranscr = {word: (np.array(list(vec)), trans)
 # print(axes2vec)
 
 
-axes = {
+
+axis = {
            'Angular - Round': (-(axes2vec['Angular']) + axes2vec['Round']),
             'Bad - Good': (-(axes2vec['Bad']) + axes2vec['Good']),
             'Cold - Hot': (-(axes2vec['Cold']) + axes2vec['Hot']),
@@ -380,7 +382,6 @@ axes = {
             'Smooth - Rough_or_not_smooth': (-(axes2vec['Smooth']) + axes2vec['Rough_or_not_smooth']),
             'Ugly - Beautiful': (-(axes2vec['Ugly']) + axes2vec['Beautiful']),
 }
-# print(axes['Angular - Round'])
 
 
 sounds = []
@@ -391,7 +392,6 @@ for item in word2vectranscr.items():
     except:
         print(transcription)
 sounds = list(set(sounds))
-# print(sounds)
 
 sound2word = {}
 
@@ -399,24 +399,16 @@ for sound in sounds:
     first_sound = []
     with_sound = []
     without_sound = []
-    for item in word2vectranscr.items():
-        transcription = item[1][1]
+    for word, (vec, phones) in word2vectranscr.items():
+        transcription = phones
         if transcription[0] == sound:
-            first_sound.append(item[0])
+            first_sound.append(word)
         elif sound in transcription:
-            with_sound.append(item[0])
+            with_sound.append(word)
         else:
-            without_sound.append(item[0])
+            without_sound.append(word)
     sound2word[sound] = (first_sound, with_sound, without_sound)
 
-# try:
-#     print(sounds[0])
-#     print(sound2word[sounds[0]][0][:5])
-#     print(sound2word[sounds[0]][1][:5])
-#     print(sound2word[sounds[0]][2][:5])
-# except:
-#     pass
-#
 
 cos_vec = {}
 sum_vec = 0
@@ -425,53 +417,86 @@ sum_axis = 0
 projection_axis = {}
 for sound in sounds:
     projection_axis[sound] = {}
-    for axis_name, axis_vec in axes.items():
-        len_axis = np.linalg.norm(axis_vec)
-        axis = axis_vec / len_axis
-        axis_distributions = []
+    for axes_name, axes_vec in axis.items():
+        len_axes = np.linalg.norm(axes_vec)
+        axes = axes_vec / len_axes
+        axes_distributions = []
         for distribution in sound2word[sound]:
             cosine_list = []
             for word in distribution:
                 word_vec = word2vectranscr[word][0]
                 len_vec = np.linalg.norm(word_vec)
                 vec = word_vec / len_vec
-
-                cosine_between_vectors = np.dot(vec, axis)
+                cosine_between_vectors = np.dot(vec, axes)
                 cosine_list.append(cosine_between_vectors)
-            axis_distributions.append(cosine_list)
-        # print('{} - {} Dist lens: {} {} {}'.format(sound, axis_name, len(axis_distributions[0]), len(axis_distributions[1]), len(axis_distributions[2])))
-        projection_axis[sound][axis_name] = axis_distributions
-        if len(axis_distributions[0]) > 20 and len(axis_distributions[1]) > 20:
-            f_w = stats.mannwhitneyu(axis_distributions[0], axis_distributions[1])[1]
-        if len(axis_distributions[1]) > 20 and len(axis_distributions[2]) > 20:
-            w_wo = stats.mannwhitneyu(axis_distributions[1], axis_distributions[2])[1]
-        if len(axis_distributions[2]) > 20 and len(axis_distributions[0]) > 20:
-            wo_f = stats.mannwhitneyu(axis_distributions[2], axis_distributions[0])[1]
-        print('{} - {} p-value: {} {} {}'.format(sound, axis_name, f_w, w_wo, wo_f))
-        if sound == "ə" and axis_name == "Rough - Tender":
-            plt.hist(axis_distributions[0], 100, alpha=0.5)
-            plt.hist(axis_distributions[1], 100, alpha=0.5)
-            plt.hist(axis_distributions[2], 100, alpha=0.5)
-            plt.show()
-            plt.clf()
+            axes_distributions.append(cosine_list)
+        print('{} - {} Dist lens: {} {} {} Sum: {}'.format(sound, axes_name,
+                                                           len(axes_distributions[0]), len(axes_distributions[1]),
+                                                           len(axes_distributions[2]),
+                                                           len(axes_distributions[0]) + len(axes_distributions[1]) + len(axes_distributions[2])
+                                                           ))
+        projection_axis[sound][axes_name] = axes_distributions
 
-        if sound == "ʌ" and axis_name == "Bad - Good":
-            plt.hist(axis_distributions[0], 100, alpha=0.5)
-            plt.hist(axis_distributions[1], 100, alpha=0.5)
-            plt.hist(axis_distributions[2], 100, alpha=0.5)
-            plt.show()
-            plt.clf()
+with open('results.csv', 'w', newline='') as csv_file:
+    fieldnames = ['phone', 'axes', 'first_with', 'with_without', 'first_without']
+    csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+    csv_writer.writeheader()
+    for phone, axis in projection_axis.items():
+        for axes_name, distributions in axis.items():
+            first_sound = distributions[0]
+            with_sound = distributions[1]
+            without_sound = distributions[2]
 
-        if sound == "ʌ" and axis_name == "Dangerous - Secure":
-            plt.hist(axis_distributions[0], 100, alpha=0.5)
-            plt.hist(axis_distributions[1], 100, alpha=0.5)
-            plt.hist(axis_distributions[2], 100, alpha=0.5)
-            plt.show()
-            plt.clf()
+            f_w = 1.0
+            w_wo = 1.0
+            wo_f = 1.0
+            if len(first_sound) > 100 and len(with_sound) > 100:
+                f_w = stats.mannwhitneyu(first_sound, with_sound)[1]
+            if len(with_sound) > 100 and len(without_sound) > 100:
+                w_wo = stats.mannwhitneyu(with_sound, without_sound)[1]
+            if len(without_sound) > 100 and len(first_sound) > 100:
+                wo_f = stats.mannwhitneyu(without_sound, first_sound)[1]
+            # print('{} - {} p-value: {} {} {}'.format(phone, axes_name, f_w, w_wo, wo_f))
 
-        if sound == "ʌ" and axis_name == "Evil - Benign":
-            plt.hist(axis_distributions[0], 100, alpha=0.5)
-            plt.hist(axis_distributions[1], 100, alpha=0.5)
-            plt.hist(axis_distributions[2], 100, alpha=0.5)
-            plt.show()
-            plt.clf()
+            wo_f_s = ''
+            if wo_f < 0.001:
+                wo_f_s = '+++{:.4}'.format(wo_f)
+            elif wo_f < 0.01:
+                wo_f_s = '++{:.4}'.format(wo_f)
+            else:
+                wo_f_s = '{:.4}'.format(wo_f)
+
+            w_wo_s = ''
+            if w_wo < 0.001:
+                w_wo_s = '+++{:.4}'.format(w_wo)
+            elif w_wo < 0.01:
+                w_wo_s = '++{:.4}'.format(w_wo)
+            else:
+                w_wo_s = '{:.4}'.format(w_wo)
+
+
+            f_w_s = ''
+            if f_w < 0.001:
+                f_w_s = '+++{:.4}'.format(f_w)
+            elif f_w < 0.01:
+                f_w_s = '++{:.4}'.format(f_w)
+            else:
+                f_w_s = '{:.4}'.format(f_w)
+
+            if f_w > 0.01 and wo_f < 0.001 and w_wo < 0.001 and \
+                    ((np.mean(first_sound) > np.mean(without_sound) and np.mean(with_sound) > np.mean(without_sound)) or
+                    (np.mean(first_sound) < np.mean(without_sound) and np.mean(with_sound) < np.mean(without_sound))):
+                print('{} - {} p-values: {:.4} {:.4} {:.4}'.format(phone, axes_name, f_w, wo_f, w_wo))
+                plt.hist(first_sound, 100, alpha=0.5, label='first')
+                plt.hist(with_sound, 100, alpha=0.5, label='with')
+                plt.hist(without_sound, 100, alpha=0.5, label='without')
+                plt.savefig('plots/' + phone + '__' + axes_name + '.png')
+                plt.close()
+
+            csv_writer.writerow({
+                'phone': phone,
+                'axes': axes_name,
+                'first_without': wo_f_s,
+                'with_without': w_wo_s,
+                'first_with': f_w_s
+            })
