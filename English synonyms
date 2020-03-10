@@ -1,0 +1,195 @@
+synonyms = {'Angular': ['jagged' ,'V-shaped', 'Y-shaped',  'cornered’, ‘angle’, ‘angled’],
+            'Round': ['cylindrical', 'elliptical', 'oval', 'rounded', 'spherical', 'circular', 'coiled', 'looped', 'orbed', 'ringed', ‘convex’, ‘spheroid',
+                      'spiral', 'annular', 'discoid', 'disk-shaped', 'egg-shaped',
+                      'globose', 'globular', 'orbicular', 'rotund'],
+
+            'Bad': ['atrocious', 'awful', 'crummy', 'dreadful', 'lousy',  'rough',                     'unacceptable', 'gross', 'imperfect', 'inferior',
+                     'abominable', 'amiss', 'bad news', 'beastly',  'careless',
+                     'crappy', 'cruddy', 'defective', 'deficient', 'dissatisfactory', 'erroneous',
+                    'fallacious', 'faulty', 'godawful', 'grody', 'grungy', 'icky', 'inadequate', 'incorrect', ‘ugly’,
+                      'raunchy', 'slipshod', 'stinking','substandard', 'unsatisfactory'],
+
+            'Good': ['acceptable', 'excellent', 'exceptional', 'favorable', 'great', 'marvelous', 'positive',
+                     'satisfactory', 'satisfying', 'superb', 'valuable', 'wonderful',
+                      'nice', 'pleasing',  'super',
+                     'superior',  'worthy', 'admirable', 'agreeable', 'commendable', 'congenial',
+                     'deluxe', 'first-class', 'first-rate',  'gratifying', 'honorable', 'neat', 'precious',
+                      'reputable',  'shipshape', 'splendid', 'stupendous'],
+
+            'Cold': ['bleak', 'chilled', 'cool',  'frigid', 'frosty', 'frozen', 'icy',
+                       'snowy', 'wintry', 'Siberian', 'arctic', 'chill', 
+                     'icebox',  'below freezing', 'below zero', 'boreal',  'gelid', 'glacial', 'iced',  'nippy', 'numbed', 'numbing', 'polar', 'shivery'],
+
+            'Hot': ['blazing', 'boiling', 'heated', 'scorching', 'sizzling', 'sultry', 'sweltering',
+                    'torrid',  'tropical', 'warm', 'broiling', 'burning', 
+                     'fiery', 'flaming', 'igneous',
+                    'incandescent', 'oven', 'fire',  'parching', 'roasting', 'scalding', 'searing', 'summery', 
+                    'warm'],
+
+            'Complex': ['complicated', 'convoluted', 'composite', 
+                       'entangled', 'heterogeneous', 'knotty', 'labyrinthine', 'mingled', 'miscellaneous', 'mixed',
+                         'multifarious', 'multiform', 'tangled', 'tortuous', 'variegated'],
+
+            'Simple': ['clean', 'elementary', 'plain', 'straightforward', 'transparent',
+                       'uncomplicated', 'walkover', 
+                       'effortless', 'facile', 'incomplex', 'intelligible', 'lucid', 'manageable', 'mild', 
+                       'self-explanatory’,  'unmistakable'],
+
+            'Cowardly': ['dastardly', 'afraid', 'anxious', 'apprehensive', 'cowering', 'craven', 'dismayed', 
+                         'frightened', 'gutless', 'willies', 'jittery', 'nervous', 'panicky', 
+                         'scared', 'shrinking', 'shy', 'soft',  'timid', 'timorous', 'weak', 'worthless',
+
+            'Brave': ['adventurous', 'audacious', 'confident', 'courageous', 'daring', 'dashing', 'fearless',
+                      'foolhardy', 'gallant', 'gutsy', 'heroic', 'reckless', 'resolute', 'spunky', 'stout',
+                      'strong', 'valiant', 'firm', 'hardy', 'militant', 'stalwart',
+                      'chivalrous', 'dauntless', 'defiant', 'doughty', 'hero', 'indomitable',
+                      'intrepid', 'plucky', 'stouthearted', 'unafraid',
+                      'undaunted', 'undismayed', 'valorous', 'venturesome'],
+
+            'Dangerous': ['alarming', 'bad', 'critical', 'deadly', 'fatal', 'nasty', 'perilous', 'precarious', 'risky',
+                          'threatening', 'treacherous',  'unhealthy', 'unsafe',
+                          'unstable',  'chancy', 'danger', 'dynamite',  'formidable',  'insecure', 
+                           'malignant’],
+
+            'Secure': ['protected', 'defended', 'guarded', 'sheltered', 'impregnable', 'riskless', 'unassailable', 'undamaged', 'unharmed'],
+
+            'Dark': ['black', 'cloudy', 'darkened', 'dim', 'dingy',  'gloomy',  'murky',
+                     'shadowy', 'somber', 'dusk', 'blackish',
+                      'cimmerian', 'clouded', 'crepuscular', 'dusky', 'grimy',
+                     'inky', 'lightless', 'lurid', 'obscure', 'opaque',
+                     'pitchy',  'shaded', 'shady', 'sooty',  'sunless', 'tenebrous',
+                     'unlighted', 'unlit'],
+
+            'Luminous': ['brilliant', 'incandescent', 'lucid', 'lustrous', 'radiant', 'shining', 'translucent', 'vivid',
+                         'beaming', 'clear', 'effulgent', 'fulgent', 'illuminated', 'lambent', 'lighted',
+                         'lit', 'lucent', 'luminescent', 'refulgent', 'resplendent', 'transparent'],
+
+            'Difficult': ['arduous', 'burdensome', 'challenging', 'demanding', 'laborious',
+                          'onerous', 'painful', 'problematic', 'severe', 'tough', 'troublesome',
+                          'backbreaker', 'bothersome', 'difficile', 'exacting', 'labored', '',
+                          'problem', 'rigid', 'stiff',  'toilsome', 'trying',  'uphill'],
+
+            'Easy': ['accessible', 'clear', 'effortless', 'obvious',  'simple',  'straightforward',
+                     'uncomplicated', 'apparent', 'basic', 'easily', 'elementary',
+                     'evident', 'facile', 'mere', 'plain', 'pushover', 'slight'],
+
+            'Evil': ['bad', 'destructive', 'heinous', 'hideous', 'malevolent', 'malicious',
+                     'nefarious', 'ugly', 'unpleasant', 'vicious', 'vile', 'villainous', 'wicked', 'foul',
+                     'offensive', 'reprobate', 'angry', 'atrocious', 
+                     'calamitous', 'damnable', 'disastrous', 'harmful',
+                     'iniquitous', 'injurious', 'loathsome', 'maleficent', 'malignant', 'obscene',
+                     'pernicious', 'rancorous', 'repugnant', 'repulsive', 'revolting', 'spiteful', 'stinking’],
+
+            'Benign': ['benevolent', 'favorable', 'friendly', 'gentle', 'mild', 'benignant', 'amiable', 'beneficent',
+                       'generous', 'genial', 'good',  'gracious', 'kind',
+                       'liberal', 'merciful', 'obliging', 'sympathetic'],
+
+            'Faded': ['shabby', 'tattered', 'threadbare', 'worn', 'bedraggled', 'dim',
+                      'discolored', 'dull', 'etiolated', 'pale', 'wan',  'achromatic', 'ashen',
+                      'dingy', 'indistinct', 'lackluster',  'murky',  'pallid'],
+
+            'Bright': ['blazing', 'brilliant', 'dazzling', 'flashing', 'glistening', 'glittering', 'golden',
+                       'luminous', 'radiant', 'shimmering', 'shiny', 'silvery', 'sparkling', 'sunny', 'vivid', 'ablaze',
+                       'aglow', 'argent', 'auroral', 'beaming', 'burning', 'burnished', 'coruscating',
+                       'effulgent', 'fulgent', 'glaring', 'gleaming', 'glossy', 'illuminated', 'illumined',
+                       'incandescent', 'irradiated', 'lambent', 'light', 'lighted', 'limpid', 'lustrous',
+                       'moonlit', 'phosphorescent', 'relucent', 'resplendent', 'scintillating', 'sunlit', 'twinkling'],
+
+            'Feeble': ['ailing', 'decrepit', 'flabby', 'fragile', 'frail', 'incompetent', 'inefficient', 'infirm',
+                       'lame', 'paltry', 'puny', 'sickly', 'weak', 'weakened', 'aged',  'debilitated',
+                        'doddering', 'dopey', 'effete', 'emasculated', 'enervated', 'enfeebled',
+                       'exhausted', 'failing', 'faint', 'gentle', 'helpless', 'impotent',
+                       'ineffectual', 'insufficient', 'languid', 'low’,  'poor', 'powerless', 'sapless', 'slight', 'strengthless', 'thin', 'weakly', 'wimpy', 'woozy'],
+
+            'Strong': ['athletic', 'big', 'durable', 'firm', 'forceful',
+                       'heavy', 'robust', 'solid', 'stable', 'steady', 'tough',
+                       'vigorous', 'enduring', 'hale',
+                       'hardy', 'hearty', 'mighty', 'muscular', 'reinforced',
+                        'sinewy', 'stalwart',  'stout', 'strapping', 'sturdy',
+                       'unyielding'],
+
+            'Masculine': ['macho', 'manly', 'muscular', 'beefcake', 'brave',
+                           'hunk', 'jock', 'male', 'courageous', 'manful', 'mannish', 'powerful', 'robust', 'strapping', 'strong', 'virile'],
+
+            'Feminine': ['lady', 'female', 'tender', 'womanly', 'effeminate', 'womanish'],
+
+            'Passive': ['apathetic', 'indifferent', 'quiet', 'static', 'unflappable',
+                         'uninvolved', 'cool', 'patient', 'asleep', 'compliant', 'docile',
+                          'inert', 'latent', 'moony', 'motionless', 
+                         'phlegmatic', 'quiescent', 'resigned', 'sleepy', 'stolid',
+                         'submissive', 'tractable', 'unassertive', 'unresisting'],
+
+            'Active': ['alive', 'effective', 'operating', 'functioning', 'movable',
+                       'operative', 'progressive', 'pushing', 'rapid', 'rolling', 'running', 'rushing',
+                       'shifting', 'simmering', 'speeding', 'streaming', 'traveling', 'walking', 'working',
+                       'astir',  'bustling', 'efficacious', 'exertive', 'hasty', 'moving', 'restless', 'speedy', 'swarming'],
+
+            'Quiet': ['muted', 'peaceful', 'reticent', 'silent', 'soft',  'hushed',  'muffled', 'mute',
+                      'quieted', 'still', 'hushful', 'inaudible', 'noiseless', 'quiescent', 'secretive', 'soundless',
+                      'speechless', 'taciturn', 'uncommunicative', 'unexpressed', 'unspeaking',
+                      'unuttered'],
+
+            'Loud': ['boisterous', 'deafening', 'intense', 'lusty', 'powerful', ‘noisy’,
+                     'rambunctious', 'raucous', 'resounding', 'ringing', 'roaring', 'rowdy', 'strident', 'strong',
+                     'thundering',  'vociferous', 'cacophonous',  'clamorous',  'fulminating', 'pealing', 'resonant',
+                     'sonorous', 'stentorian', 'tumultuous', 'uproarious'],
+
+            'Rough': ['coarse',  'harsh', 'rugged’],
+
+            'Tender': ['delicate', 'supple', 'breakable', 'frail', 'effete', 'feeble', 'weak’, ’soft’],
+
+            'Sad': ['bitter', 'dismal', 'heartbroken', 'melancholy', 'mournful', 'pessimistic', 'somber', 'sorrowful',
+                     'sorry', 'wistful',  'cheerless', 'dejected', 'despairing', 'despondent',
+                     'disconsolate', 'distressed', 'doleful', 'dumps', 
+                     'downcast', 'forlorn', 'gloomy', 'glum', 'grieved', 'heartsick', 'hurting', 'languishing', 
+                     'lugubrious', 'morbid', 'morose', 'pensive', 'troubled', 'weeping', 'woebegone'],
+
+            'Joyful': ['cheerful', 'cheery', 'ecstatic', 'elated', 'enjoyable', 'festive', 'joyous',
+                       'jubilant', 'lighthearted', 'merry', 'pleasurable', 'rapturous', 'upbeat', 'blithesome',
+                       'delighted', 'enraptured', 'glad', 'gratified', 'jocund', 'jolly', 'jovial',
+                       'overjoyed', 'pleased', 'satisfied'],
+
+            'Short': ['abbreviated', 'brief', 'shortened', 'terse', 'abbreviate',
+                      'compressed', 'condensed', 'curtailed', 'decreased', 'diminished', 'lessened',
+                      'little', 'concise', 'curtate', 'cut', 'short', 'momentary',  'succinct', 'undersized'],
+
+            'Long':['deep', 'high', 'lengthy', 'protracted', 'tall', 'continued', 'elongate', 'elongated',
+                    'enduring', 'lengthened', 'lingering', 'prolonged', 'stretch', 'stretched', 'stretching', 'towering', 'distant', 
+                     'gangling', 'lanky', 'longish',
+                    'outstretched', 'rangy'],
+
+            'Slow': ['gradual', 'leisurely', 'quiet', 'sluggish', 'creeping',
+                     'plodding',  'procrastinating', 'dilatory',  'indolent', 'laggard', 'tardy', ‘torpid'],
+
+            'Quick': [‘active', 'agile', 'brisk', 'cursory', 'energetic', 'expeditious', 'hasty',
+                      'hurried', 'immediate', 'instantaneous',  'rapid', 'sudden', 'swift', 'express', 'prompt',  'accelerated',
+                      'headlong', 'impetuous',  'posthaste', 'pronto', 'snappy'],
+
+            'Small': ['meager', 'microscopic', 'miniature', 'minuscule', 'modest',
+                      'paltry', 'short', 'slight',  'young', 'baby', 'diminutive',
+                      'little', 'mini', 'petite', 'petty', 'scanty', 'wee',
+                      'bitty', 'insufficient',
+                      'piddling',  'puny', 'runty', 'scrubby',
+                      'stunted', 'teensy', 'teeny', 'trivial', 'undersized'],
+
+            'Big': ['colossal', 'considerable', 'enormous', 'fat', 'full', 'gigantic', 'hefty', 'huge', 'immense', ‘large’,
+                    'massive', 'sizable', 'substantial', 'tremendous', 'vast', 'bulky', 'capacious', 'copious',
+                    'extensive',  'hulking', 'humongous', 'jumbo', 'mammoth', 'oversize',  'prodigious', 'roomy', 'spacious',
+                    'colossal', 'voluminous', 'whopping'],
+
+            'Smooth': ['continuous', 'flat', 'glossy', 'polished', 'silky', 'sleek', 'steady',
+                        'even', 'plain', 'shaven', 'equable', 'fluent',
+                       'frictionless', 'glassy', 'hairless', 'unruffled'],
+
+            'Rough_or_not_smooth': ['harsh',  'intermittent', 'rough', 'sharp', 'unstable', 'uneven',  'coarse', 'wrinkled'],
+
+            'Ugly': ['awful', 'grisly', 'hideous', 'horrid', 'unseemly', 'unsightly',                     'appalling', 'bad-looking', 'beastly', 'deformed', 'disfigured', 'foul', 'frightful', 'gross',
+                     'loathsome', 'misshapen', 'monstrous', 'repelling', 'repugnant', 'repulsive', 'revolting', 'unbeautiful',
+                     'uncomely', 'uninviting', 'unlovely', 'unprepossessing'],
+           
+            'Beautiful': ['alluring', 'appealing', 'charming', 'cute', 'dazzling', 'delicate', 'delightful', 'elegant',
+                          'exquisite', 'fascinating', 'fine', 'good-looking', 'gorgeous', 'graceful', 'grand', 
+                          'handsome', 'lovely', 'magnificent', 'marvelous', 'pleasing', 'pretty', 'splendid', 
+                          'stunning', 'superb', 'wonderful', 'admirable', 'angelic', 'beauteous', 'bewitching', 
+                          'classy', 'comely', 'divine', 'enticing', 'excellent', 'fair', 'ideal', 'nice', 
+                          'pulchritudinous', 'ravishing', 'refined', 'resplendent', 'shapely', 'sightly']}
