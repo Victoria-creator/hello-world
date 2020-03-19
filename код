@@ -1,0 +1,430 @@
+import io
+import numpy as np
+import pickle
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+import csv
+
+# FILE = "/Users/user/Downloads/cc.en.300.vec"
+#
+#
+# def load_vectors(fname):
+#     fin = io.open(fname, 'r', encoding='utf-8', newline='\n', errors='ignore')
+#     # n, word2vec = map(int, fin.readline().split())
+#     data = {}
+#     # l_count = 0
+#     for line in fin:
+#         tokens = line.rstrip().split(' ')
+#         # if tokens[0] in good or tokens[0] in bad:  # only words in lists
+#         data[tokens[0]] = np.array(list(map(float, np.array(tokens[1:]))))
+#         # l_count += 1
+#         # print(np.array(tokens[1:]))
+#     return data
+#
+#
+# word2vec = load_vectors(FILE)
+
+synonyms = {'Angular': ['jagged', 'V-shaped', 'Y-shaped', 'cornered', 'angle', 'angled'],
+
+            'Round': ['cylindrical', 'elliptical', 'oval', 'rounded', 'spherical', 'circular', 'coiled', 'looped',
+                      'orbed', 'ringed', 'convex', 'spheroid', 'spiral', 'annular', 'discoid', 'disk-shaped',
+                      'egg-shaped', 'globose', 'globular', 'orbicular', 'rotund'],
+
+            'Bad': ['atrocious', 'awful', 'crummy', 'dreadful', 'lousy', 'rough', 'unacceptable', 'gross', 'imperfect',
+                    'inferior', 'abominable', 'amiss', 'bad news', 'beastly', 'careless', 'crappy', 'cruddy',
+                    'defective',
+                    'deficient', 'dissatisfactory', 'erroneous', 'fallacious', 'faulty', 'godawful', 'grody', 'grungy',
+                    'icky', 'inadequate', 'incorrect', 'ugly', 'raunchy', 'slipshod', 'stinking', 'substandard',
+                    'unsatisfactory'],
+
+            'Good': ['acceptable', 'excellent', 'exceptional', 'favorable', 'great', 'marvelous', 'positive',
+                     'satisfactory', 'satisfying', 'superb', 'valuable', 'wonderful', 'nice', 'pleasing', 'super',
+                     'superior', 'worthy', 'admirable', 'agreeable', 'commendable', 'congenial',
+                     'deluxe', 'first-class', 'first-rate', 'gratifying', 'honorable', 'neat', 'precious',
+                     'reputable', 'shipshape', 'splendid', 'stupendous'],
+
+            'Cold': ['bleak', 'chilled', 'cool', 'frigid', 'frosty', 'frozen', 'icy', 'snowy', 'wintry', 'Siberian',
+                     'arctic', 'chill', 'icebox', 'below freezing', 'below zero', 'boreal', 'gelid', 'glacial',
+                     'iced', 'nippy', 'numbed', 'numbing', 'polar', 'shivery'],
+
+            'Hot': ['blazing', 'boiling', 'heated', 'scorching', 'sizzling', 'sultry', 'sweltering', 'torrid',
+                    'tropical',
+                    'warm', 'broiling', 'burning', 'fiery', 'flaming', 'igneous', 'incandescent', 'oven', 'fire',
+                    'parching', 'roasting', 'scalding', 'searing', 'summery', 'warm'],
+
+            'Complex': ['complicated', 'convoluted', 'composite', 'entangled', 'heterogeneous', 'knotty',
+                        'labyrinthine',
+                        'mingled', 'miscellaneous', 'mixed', 'multifarious', 'multiform', 'tangled', 'tortuous',
+                        'variegated'],
+
+            'Simple': ['clean', 'elementary', 'plain', 'straightforward', 'transparent', 'uncomplicated', 'walkover',
+                       'effortless', 'facile', 'incomplex', 'intelligible', 'lucid', 'manageable', 'mild',
+                       'self-explanatory', 'unmistakable'],
+
+            'Cowardly': ['dastardly', 'afraid', 'anxious', 'apprehensive', 'cowering', 'craven', 'dismayed',
+                         'frightened',
+                         'gutless', 'willies', 'jittery', 'nervous', 'panicky', 'scared', 'shrinking', 'shy', 'soft',
+                         'timid', 'timorous', 'weak', 'worthless'],
+
+            'Brave': ['adventurous', 'audacious', 'confident', 'courageous', 'daring', 'dashing', 'fearless',
+                      'foolhardy', 'gallant', 'gutsy', 'heroic', 'reckless', 'resolute', 'spunky', 'stout', 'strong',
+                      'valiant', 'firm', 'hardy', 'militant', 'stalwart', 'chivalrous', 'dauntless', 'defiant',
+                      'doughty',
+                      'hero', 'indomitable', 'intrepid', 'plucky', 'stouthearted', 'unafraid', 'undaunted',
+                      'undismayed',
+                      'valorous', 'venturesome'],
+
+            'Dangerous': ['alarming', 'bad', 'critical', 'deadly', 'fatal', 'nasty', 'perilous', 'precarious', 'risky',
+                          'threatening', 'treacherous', 'unhealthy', 'unsafe', 'unstable', 'chancy', 'danger',
+                          'dynamite',
+                          'formidable', 'insecure', 'malignant'],
+
+            'Secure': ['protected', 'defended', 'guarded', 'sheltered', 'impregnable', 'riskless', 'unassailable',
+                       'undamaged', 'unharmed'],
+
+            'Dark': ['black', 'cloudy', 'darkened', 'dim', 'dingy', 'gloomy', 'murky', 'shadowy', 'somber', 'dusk',
+                     'blackish', 'cimmerian', 'clouded', 'crepuscular', 'dusky', 'grimy', 'inky', 'lightless', 'lurid',
+                     'obscure', 'opaque', 'pitchy', 'shaded', 'shady', 'sooty', 'sunless', 'tenebrous', 'unlighted',
+                     'unlit'],
+
+            'Luminous': ['brilliant', 'incandescent', 'lucid', 'lustrous', 'radiant', 'shining', 'translucent', 'vivid',
+                         'beaming', 'clear', 'effulgent', 'fulgent', 'illuminated', 'lambent', 'lighted',
+                         'lit', 'lucent', 'luminescent', 'refulgent', 'resplendent', 'transparent'],
+
+            'Difficult': ['arduous', 'burdensome', 'challenging', 'demanding', 'laborious', 'onerous', 'painful',
+                          'problematic', 'severe', 'tough', 'troublesome', 'backbreaker', 'bothersome', 'difficile',
+                          'exacting', 'labored', 'problem', 'rigid', 'stiff', 'toilsome', 'trying', 'uphill'],
+
+            'Easy': ['accessible', 'clear', 'effortless', 'obvious', 'simple', 'straightforward', 'uncomplicated',
+                     'apparent', 'basic', 'easily', 'elementary', 'evident', 'facile', 'mere', 'plain', 'pushover',
+                     'slight'],
+
+            'Evil': ['bad', 'destructive', 'heinous', 'hideous', 'malevolent', 'malicious', 'nefarious', 'ugly',
+                     'unpleasant', 'vicious', 'vile', 'villainous', 'wicked', 'foul', 'offensive', 'reprobate', 'angry',
+                     'atrocious', 'calamitous', 'damnable', 'disastrous', 'harmful', 'iniquitous', 'injurious',
+                     'loathsome',
+                     'maleficent', 'malignant', 'obscene', 'pernicious', 'rancorous', 'repugnant', 'repulsive',
+                     'revolting', 'spiteful', 'stinking'],
+
+            'Benign': ['benevolent', 'favorable', 'friendly', 'gentle', 'mild', 'benignant', 'amiable', 'beneficent',
+                       'generous', 'genial', 'good', 'gracious', 'kind', 'liberal', 'merciful', 'obliging',
+                       'sympathetic'],
+
+            'Faded': ['shabby', 'tattered', 'threadbare', 'worn', 'bedraggled', 'dim', 'discolored', 'dull',
+                      'etiolated',
+                      'pale', 'wan', 'achromatic', 'ashen', 'dingy', 'indistinct', 'lackluster', 'murky', 'pallid'],
+
+            'Bright': ['blazing', 'brilliant', 'dazzling', 'flashing', 'glistening', 'glittering', 'golden',
+                       'luminous', 'radiant', 'shimmering', 'shiny', 'silvery', 'sparkling', 'sunny', 'vivid', 'ablaze',
+                       'aglow', 'argent', 'auroral', 'beaming', 'burning', 'burnished', 'coruscating',
+                       'effulgent', 'fulgent', 'glaring', 'gleaming', 'glossy', 'illuminated', 'illumined',
+                       'incandescent', 'irradiated', 'lambent', 'light', 'lighted', 'limpid', 'lustrous',
+                       'moonlit', 'phosphorescent', 'relucent', 'resplendent', 'scintillating', 'sunlit', 'twinkling'],
+
+            'Feeble': ['ailing', 'decrepit', 'flabby', 'fragile', 'frail', 'incompetent', 'inefficient', 'infirm',
+                       'lame', 'paltry', 'puny', 'sickly', 'weak', 'weakened', 'aged', 'debilitated',
+                       'doddering', 'dopey', 'effete', 'emasculated', 'enervated', 'enfeebled',
+                       'exhausted', 'failing', 'faint', 'gentle', 'helpless', 'impotent',
+                       'ineffectual', 'insufficient', 'languid', 'low', 'poor', 'powerless', 'sapless', 'slight',
+                       'strengthless',
+                       'thin', 'weakly', 'wimpy', 'woozy'],
+
+            'Strong': ['athletic', 'big', 'durable', 'firm', 'forceful', 'heavy', 'robust', 'solid', 'stable', 'steady',
+                       'tough', 'vigorous', 'enduring', 'hale', 'hardy', 'hearty', 'mighty', 'muscular', 'reinforced',
+                       'sinewy', 'stalwart', 'stout', 'strapping', 'sturdy', 'unyielding'],
+
+            'Masculine': ['macho', 'manly', 'muscular', 'beefcake', 'brave', 'hunk', 'jock', 'male', 'courageous',
+                          'manful',
+                          'mannish', 'powerful', 'robust', 'strapping', 'strong', 'virile'],
+
+            'Feminine': ['lady', 'female', 'tender', 'womanly', 'effeminate', 'womanish'],
+
+            'Passive': ['apathetic', 'indifferent', 'quiet', 'static', 'unflappable', 'uninvolved', 'cool', 'patient',
+                        'asleep', 'compliant', 'docile', 'inert', 'latent', 'moony', 'motionless', 'phlegmatic',
+                        'quiescent', 'resigned', 'sleepy', 'stolid', 'submissive', 'tractable', 'unassertive',
+                        'unresisting'],
+
+            'Active': ['alive', 'effective', 'operating', 'functioning', 'movable',
+                       'operative', 'progressive', 'pushing', 'rapid', 'rolling', 'running', 'rushing',
+                       'shifting', 'simmering', 'speeding', 'streaming', 'traveling', 'walking', 'working',
+                       'astir', 'bustling', 'efficacious', 'exertive', 'hasty', 'moving', 'restless', 'speedy',
+                       'swarming'],
+
+            'Quiet': ['muted', 'peaceful', 'reticent', 'silent', 'soft', 'hushed', 'muffled', 'mute',
+                      'quieted', 'still', 'hushful', 'inaudible', 'noiseless', 'quiescent', 'secretive', 'soundless',
+                      'speechless', 'taciturn', 'uncommunicative', 'unexpressed', 'unspeaking',
+                      'unuttered'],
+
+            'Loud': ['boisterous', 'deafening', 'intense', 'lusty', 'powerful', 'noisy',
+                     'rambunctious', 'raucous', 'resounding', 'ringing', 'roaring', 'rowdy', 'strident', 'strong',
+                     'thundering', 'vociferous', 'cacophonous', 'clamorous', 'fulminating', 'pealing', 'resonant',
+                     'sonorous', 'stentorian', 'tumultuous', 'uproarious'],
+
+            'Rough': ['coarse', 'harsh', 'rugged'],
+
+            'Tender': ['delicate', 'supple', 'breakable', 'frail', 'effete', 'feeble', 'weak', 'soft'],
+
+            'Sad': ['bitter', 'dismal', 'heartbroken', 'melancholy', 'mournful', 'pessimistic', 'somber', 'sorrowful',
+                    'sorry', 'wistful', 'cheerless', 'dejected', 'despairing', 'despondent',
+                    'disconsolate', 'distressed', 'doleful', 'dumps',
+                    'downcast', 'forlorn', 'gloomy', 'glum', 'grieved', 'heartsick', 'hurting', 'languishing',
+                    'lugubrious', 'morbid', 'morose', 'pensive', 'troubled', 'weeping', 'woebegone'],
+
+            'Joyful': ['cheerful', 'cheery', 'ecstatic', 'elated', 'enjoyable', 'festive', 'joyous',
+                       'jubilant', 'lighthearted', 'merry', 'pleasurable', 'rapturous', 'upbeat', 'blithesome',
+                       'delighted', 'enraptured', 'glad', 'gratified', 'jocund', 'jolly', 'jovial',
+                       'overjoyed', 'pleased', 'satisfied'],
+
+            'Short': ['abbreviated', 'brief', 'shortened', 'terse', 'abbreviate',
+                      'compressed', 'condensed', 'curtailed', 'decreased', 'diminished', 'lessened',
+                      'little', 'concise', 'curtate', 'cut', 'short', 'momentary', 'succinct', 'undersized'],
+
+            'Long': ['deep', 'high', 'lengthy', 'protracted', 'tall', 'continued', 'elongate', 'elongated',
+                     'enduring', 'lengthened', 'lingering', 'prolonged', 'stretch', 'stretched', 'stretching',
+                     'towering',
+                     'distant', 'gangling', 'lanky', 'longish', 'outstretched', 'rangy'],
+
+            'Slow': ['gradual', 'leisurely', 'quiet', 'sluggish', 'creeping',
+                     'plodding', 'procrastinating', 'dilatory', 'indolent', 'laggard', 'tardy', 'torpid'],
+
+            'Quick': ['active', 'agile', 'brisk', 'cursory', 'energetic', 'expeditious', 'hasty',
+                      'hurried', 'immediate', 'instantaneous', 'rapid', 'sudden', 'swift', 'express', 'prompt',
+                      'accelerated',
+                      'headlong', 'impetuous', 'posthaste', 'pronto', 'snappy'],
+
+            'Small': ['meager', 'microscopic', 'miniature', 'minuscule', 'modest',
+                      'paltry', 'short', 'slight', 'young', 'baby', 'diminutive',
+                      'little', 'mini', 'petite', 'petty', 'scanty', 'wee',
+                      'bitty', 'insufficient',
+                      'piddling', 'puny', 'runty', 'scrubby',
+                      'stunted', 'teensy', 'teeny', 'trivial', 'undersized'],
+
+            'Big': ['colossal', 'considerable', 'enormous', 'fat', 'full', 'gigantic', 'hefty', 'huge', 'immense',
+                    'large',
+                    'massive', 'sizable', 'substantial', 'tremendous', 'vast', 'bulky', 'capacious', 'copious',
+                    'extensive', 'hulking', 'humongous', 'jumbo', 'mammoth', 'oversize', 'prodigious', 'roomy',
+                    'spacious',
+                    'colossal', 'voluminous', 'whopping'],
+
+            'Smooth': ['continuous', 'flat', 'glossy', 'polished', 'silky', 'sleek', 'steady',
+                       'even', 'plain', 'shaven', 'equable', 'fluent',
+                       'frictionless', 'glassy', 'hairless', 'unruffled'],
+
+            'Rough_or_not_smooth': ['harsh', 'intermittent', 'rough', 'sharp', 'unstable', 'uneven', 'coarse',
+                                    'wrinkled'],
+
+            'Ugly': ['awful', 'grisly', 'hideous', 'horrid', 'unseemly', 'unsightly', 'appalling', 'bad-looking',
+                     'beastly',
+                     'deformed', 'disfigured', 'foul', 'frightful', 'gross',
+                     'loathsome', 'misshapen', 'monstrous', 'repelling', 'repugnant', 'repulsive', 'revolting',
+                     'unbeautiful',
+                     'uncomely', 'uninviting', 'unlovely', 'unprepossessing'],
+
+            'Beautiful': ['alluring', 'appealing', 'charming', 'cute', 'dazzling', 'delicate', 'delightful', 'elegant',
+                          'exquisite', 'fascinating', 'fine', 'good-looking', 'gorgeous', 'graceful', 'grand',
+                          'handsome', 'lovely', 'magnificent', 'marvelous', 'pleasing', 'pretty', 'splendid',
+                          'stunning', 'superb', 'wonderful', 'admirable', 'angelic', 'beauteous', 'bewitching',
+                          'classy', 'comely', 'divine', 'enticing', 'excellent', 'fair', 'ideal', 'nice',
+                          'pulchritudinous', 'ravishing', 'refined', 'resplendent', 'shapely', 'sightly']}
+
+# word2trans = {}
+# with open('/Users/user/Downloads/ipa-dict-master/data/en_UK.txt', 'r', encoding='utf-8') as in_file:
+#     for line in in_file.readlines():
+#         word = line.strip().split()[0]
+#         trans = line.strip().split()[1]
+#         word2trans[word] = trans
+# # print(word2trans)
+# with open("word2trans.pkl", "wb") as out_file:
+#     pickle.dump(word2trans, out_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open("word2trans.pkl", "rb") as out_file:
+    word2trans = pickle.load(out_file)
+
+# axes2vec = {}
+# for item in synonyms.items():
+#     sum = np.zeros((300))
+#     for word in item[1]:
+#         try:
+#             sum += np.array(list(word2vec[word]))
+#         except:
+#             print(word)
+#     axes2vec[item[0]] = sum
+# print(axes2vec)
+
+# with open("axes2vec.pkl", "wb") as out_file:
+#     pickle.dump(axes2vec, out_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open("/Users/user/Downloads/axes2vec.pkl", "rb") as out_file:
+    axes2vec = pickle.load(out_file)
+
+# word2vectrans = {}
+# for word in word2trans.keys():
+#     try:
+#         word2vectrans[word] = (word2vec[word], word2trans[word])
+#     except:
+#         # pass
+#         print(word)
+#
+# with open("word2vectrans.pkl", "wb") as out_file:
+#     pickle.dump(word2vectrans, out_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open("word2vectrans.pkl", "rb") as out_file:
+    word2vectrans = pickle.load(out_file)
+# print(word2vectranscr)
+
+word2vectrans = {word: (np.array(list(vec)), trans)
+                 for
+                 word, (vec, trans)
+                 in
+                 word2vectrans.items()}
+
+axis = {
+    'Angular - Round': (-(axes2vec['Angular']) + axes2vec['Round']),
+    'Bad - Good': (-(axes2vec['Bad']) + axes2vec['Good']),
+    'Cold - Hot': (-(axes2vec['Cold']) + axes2vec['Hot']),
+    'Complex - Simple': (-(axes2vec['Complex']) + axes2vec['Simple']),
+    'Cowardly - Brave': (-(axes2vec['Cowardly']) + axes2vec['Brave']),
+    'Dangerous - Secure': (-(axes2vec['Dangerous']) + axes2vec['Secure']),
+    'Dark - Luminous': (-(axes2vec['Dark']) + axes2vec['Luminous']),
+    'Difficult - Easy': (-(axes2vec['Difficult']) + axes2vec['Easy']),
+    'Evil - Benign': (-(axes2vec['Evil']) + axes2vec['Benign']),
+    'Faded - Bright': (-(axes2vec['Faded']) + axes2vec['Bright']),
+    'Feeble - Strong': (-(axes2vec['Feeble']) + axes2vec['Strong']),
+    'Masculine - Feminine': (-(axes2vec['Masculine']) + axes2vec['Feminine']),
+    'Passive - Active': (-(axes2vec['Passive']) + axes2vec['Active']),
+    'Quiet - Loud': (-(axes2vec['Quiet']) + axes2vec['Loud']),
+    'Rough - Tender': (-(axes2vec['Rough']) + axes2vec['Tender']),
+    'Sad - Joyful': (-(axes2vec['Sad']) + axes2vec['Joyful']),
+    'Short - Long': (-(axes2vec['Short']) + axes2vec['Round']),
+    'Slow - Quick': (-(axes2vec['Slow']) + axes2vec['Quick']),
+    'Small - Big': (-(axes2vec['Small']) + axes2vec['Big']),
+    'Smooth - Rough_or_not_smooth': (-(axes2vec['Smooth']) + axes2vec['Rough_or_not_smooth']),
+    'Ugly - Beautiful': (-(axes2vec['Ugly']) + axes2vec['Beautiful'])}
+
+# with open("axis.pkl", "wb") as out_file:
+#     pickle.dump(axis, out_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open("/Users/user/Downloads/axes2vec.pkl", "rb") as out_file:
+    axes2vec = pickle.load(out_file)
+
+sounds = []
+for item in word2vectrans.items():
+    transcription = item[1][1]
+    try:
+        sounds += transcription
+    except:
+        print(transcription)
+sounds = list(set(sounds))
+
+# with open("sounds.pkl", "wb") as out_file:
+#     pickle.dump(sounds, out_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+sound2word = {}
+
+for sound in sounds:
+    first_sound = []
+    with_sound = []
+    without_sound = []
+    for word, (vec, phones) in word2vectrans.items():
+        transcription = phones
+        if transcription[0] == sound:
+            first_sound.append(word)
+        elif sound in transcription:
+            with_sound.append(word)
+        else:
+            without_sound.append(word)
+    sound2word[sound] = (first_sound, with_sound, without_sound)
+
+cos_vec = {}
+sum_vec = 0
+sum_axis = 0
+
+projection_axis = {}
+for sound in sounds:
+    projection_axis[sound] = {}
+    for axes_name, axes_vec in axis.items():
+        len_axes = np.linalg.norm(axes_vec)
+        axes = axes_vec / len_axes
+        axes_distributions = []
+        for distribution in sound2word[sound]:
+            cosine_list = []
+            for word in distribution:
+                word_vec = word2vectrans[word][0]
+                len_vec = np.linalg.norm(word_vec)
+                vec = word_vec / len_vec
+                cosine_between_vectors = np.dot(vec, axes)
+                cosine_list.append(cosine_between_vectors)
+            axes_distributions.append(cosine_list)
+        print('{} - {} Dist lens: {} {} {} Sum: {}'.format(sound, axes_name,
+                                                           len(axes_distributions[0]), len(axes_distributions[1]),
+                                                           len(axes_distributions[2]),
+                                                           len(axes_distributions[0]) + len(
+                                                               axes_distributions[1]) + len(axes_distributions[2])
+                                                           ))
+        projection_axis[sound][axes_name] = axes_distributions
+        print(projection_axis)
+        with open("projection_axis.pkl", "wb") as out_file:
+            pickle.dump(projection_axis, out_file, protocol=pickle.HIGHEST_PROTOCOL)
+
+# with open('results.csv', 'w', newline='') as csv_file:
+#     fieldnames = ['phone', 'axes', 'first_with', 'with_without', 'first_without']
+#     csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+#     csv_writer.writeheader()
+#     for phone, axis in projection_axis.items():
+#         for axes_name, distributions in axis.items():
+#             first_sound = distributions[0]
+#             with_sound = distributions[1]
+#             without_sound = distributions[2]
+#
+#             f_w = 1.0
+#             w_wo = 1.0
+#             wo_f = 1.0
+#             if len(first_sound) > 100 and len(with_sound) > 100:
+#                 f_w = stats.mannwhitneyu(first_sound, with_sound)[1]
+#             if len(with_sound) > 100 and len(without_sound) > 100:
+#                 w_wo = stats.mannwhitneyu(with_sound, without_sound)[1]
+#             if len(without_sound) > 100 and len(first_sound) > 100:
+#                 wo_f = stats.mannwhitneyu(without_sound, first_sound)[1]
+#             # print('{} - {} p-value: {} {} {}'.format(phone, axes_name, f_w, w_wo, wo_f))
+#
+#             wo_f_s = ''
+#             if wo_f < 0.001:
+#                 wo_f_s = '+++{:.4}'.format(wo_f)
+#             elif wo_f < 0.01:
+#                 wo_f_s = '++{:.4}'.format(wo_f)
+#             else:
+#                 wo_f_s = '{:.4}'.format(wo_f)
+#
+#             w_wo_s = ''
+#             if w_wo < 0.001:
+#                 w_wo_s = '+++{:.4}'.format(w_wo)
+#             elif w_wo < 0.01:
+#                 w_wo_s = '++{:.4}'.format(w_wo)
+#             else:
+#                 w_wo_s = '{:.4}'.format(w_wo)
+#
+#             f_w_s = ''
+#             if f_w < 0.001:
+#                 f_w_s = '+++{:.4}'.format(f_w)
+#             elif f_w < 0.01:
+#                 f_w_s = '++{:.4}'.format(f_w)
+#             else:
+#                 f_w_s = '{:.4}'.format(f_w)
+#
+#             if f_w > 0.01 and wo_f < 0.001 and w_wo < 0.001 and \
+#                     ((np.mean(first_sound) > np.mean(without_sound) and np.mean(with_sound) > np.mean(without_sound)) or
+#                      (np.mean(first_sound) < np.mean(without_sound) and np.mean(with_sound) < np.mean(without_sound))):
+#                 print('{} - {} p-values: {:.4} {:.4} {:.4}'.format(phone, axes_name, f_w, wo_f, w_wo))
+#                 plt.hist(first_sound, 100, alpha=0.5, label='first')
+#                 plt.hist(with_sound, 100, alpha=0.5, label='with')
+#                 plt.hist(without_sound, 100, alpha=0.5, label='without')
+#                 plt.savefig('plots/' + phone + '__' + axes_name + '.png')
+#                 plt.close()
+#
+#             csv_writer.writerow({
+#                 'phone': phone,
+#                 'axes': axes_name,
+#                 'first_without': wo_f_s,
+#                 'with_without': w_wo_s,
+#                 'first_with': f_w_s
+#             })
