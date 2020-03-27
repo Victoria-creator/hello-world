@@ -1,84 +1,165 @@
-‘Angular’: [‘kulmikas’, ‘kulma’, ‘terävä’, ‘neliö‘, ‘vino‘, ‘tähdenmuotoinen’, ‘kaksipurjeinen’, ‘teräväkärkinen’, ‘tasakulmainen’, ‘samankulmainen’, ‘suorakaiteen muotoinen’, ‘teräväkulmainen’, ‘neliömäinen’, ‘kolmikolkkainen’, ‘kolmiomainen’, ‘särmikäs’],
+synonyms = {'Angular': ['kulmikas', 'kulma', 'terävä', 'neliö', 'vino', 'tähdenmuotoinen', 'kaksipurjeinen',
+                        'teräväkärkinen', 'tasakulmainen', 'samankulmainen', 'suorakaiteen muotoinen',
+                        'teräväkulmainen', 'neliömäinen', 'kolmikolkkainen', 'kolmiomainen', 'särmikäs'],
+            'Round': ['pyöristää', 'pyöristää alas', 'pyöristää ylös'],
 
-‘Round’: [‘pyöristää’, ‘pyöristää alas’, ‘pyöristää ylös’],
+            'Bad': ['huono', 'pahaenteinen', 'uhkaava', 'ikävä', 'karhea', 'paha', 'epäonninen', 'epäonnistunut',
+                    'puutteellinen',
+                    'viallinen', 'virheellinen', 'rikkinäinen', 'hankala', 'vakava', 'ilkeä', 'paheellinen',
+                    'huonotapainen',
+                    'onneton', 'surullinen', 'tyytymätön', 'epäsuotuisa', 'haitallinen', 'vahingollinen', 'heikko',
+                    'kivulias',
+                    'vahingoittunut', 'huonokuntoinen', 'ei terve', 'sairas', 'mauton', 'paheksuttava', 'murrettu',
+                    'lyhyt',
+                    'hatara', 'kehno', 'taitamaton', 'kelvoton', 'köykäinen', 'kurja', 'surkea', 'rähjäinen', 'tökerö'],
 
-‘Bad’: [‘huono’, ‘pahaenteinen’, ‘uhkaava’, ‘ikävä’, ‘karhea’, ‘paha’, ‘epäonninen’, ‘epäonnistunut’, ‘puutteellinen’, ‘viallinen’, ‘virheellinen’, ‘rikkinäinen’, ‘hankala’, ‘vakava’, ‘ilkeä’, ‘paheellinen’, ‘huonotapainen’, ‘onneton’, ‘surullinen’, ‘tyytymätön’, ‘epäsuotuisa’, ‘haitallinen’, ‘vahingollinen’, ‘heikko’, ‘kivulias’, ‘vahingoittunut’, ‘huonokuntoinen’, ‘ei terve’, ‘sairas’, ‘mauton’, ‘paheksuttava’, ‘murrettu’, ‘lyhyt’, ‘hatara’, ‘kehno’, ‘taitamaton’, ‘kelvoton’, ‘köykäinen’, ‘kurja’, ‘surkea’, ‘rähjäinen’, ‘tökerö’],
+            'Good': ['hyvä edullinen', 'hyvää tekevä', 'suotuisa', 'terveellinen', 'hyödyllinen', 'koko', 'kokonainen',
+                     'täydellinen', 'täysi', 'kunnon', 'perinpohjainen', 'tarkka', 'neuvokas', 'taitava', 'terävä',
+                     'älykäs',
+                     'viisas', 'näpparä', 'nokkela', 'näppärä', 'tärkeä', 'läheinen', 'sikeä', 'katkeamaton',
+                     'arvostettu', 'hieno',
+                     'kelpo', 'melkoinen', 'reilu', 'erinomainen', 'loistava', 'ensiluokkainen', 'upea', 'mahtava',
+                     'siisti',
+                     'aika hyvä', 'ei hassumpi', 'kiva', 'ihana', 'ihan hyvä', 'mainio', 'hyveellinen', 'kiltti',
+                     'ystävällinen',
+                     'terve', 'hyväkuntoinen', 'miellyttävä', 'mukava', 'oikea', 'otollinen', 'sopiva', 'kypsä',
+                     'valmis',
+                     'ihailtava', 'kunnioitettava', 'kunniallinen', 'säädyllinen', 'oikeudenmukainen', 'kunniakas',
+                     'rehellinen',
+                     'kunnossa', 'oikein', 'tyydyttävä', 'ok', 'okei', 'hyvässä kunnossa oleva', 'luotettava',
+                     'järkevä',
+                     'perusteltu', 'riskitön', 'varma', 'turvallinen', 'turvattu', 'magna cum laude', 'hyvyys',
+                     'hyväntahtoisuus',
+                     'etu', 'hyöty'],
 
-‘Good’: [‘hyvä ‘, ‘edullinen’, ‘hyvää tekevä’, ‘suotuisa’, ‘terveellinen’, ‘hyödyllinen’, ‘koko’, ‘kokonainen’, ‘täydellinen’, ‘täysi’, ‘kunnon’, ‘perinpohjainen’, ‘tarkka’, ‘neuvokas’, ‘taitava’, ‘terävä’, ‘älykäs’, ‘viisas’, ‘näpparä’, ‘nokkela’, ‘näppärä’, ‘tärkeä’, ‘läheinen’, ‘sikeä’, ‘katkeamaton’, ‘arvostettu’, ‘hieno’, ‘kelpo’, ‘melkoinen’, ‘reilu’, ‘erinomainen’, ‘loistava’, ‘ensiluokkainen’, ‘upea’, ‘mahtava’, ‘siisti’, ‘aika hyvä’, ‘ei hassumpi’, ‘kiva’, ‘ihana’, ‘ihan hyvä’, ‘mainio’, ‘hyveellinen’, ‘kiltti’, ‘ystävällinen’, ‘terve’, ‘hyväkuntoinen’, ‘miellyttävä’, ‘mukava’, ‘oikea’, ‘otollinen’, ‘sopiva’, ‘kypsä’, ‘valmis’, ‘ihailtava’, ‘kunnioitettava’, ‘kunniallinen’, ‘säädyllinen’, ‘oikeudenmukainen’, ‘kunniakas’, ‘rehellinen’, ‘kunnossa’, ‘oikein’, ‘tyydyttävä’, ‘ok’, ‘okei’, ‘hyvässä kunnossa oleva’, ‘luotettava’, ‘järkevä’, ‘perusteltu’, ‘riskitön’, ‘varma’, ‘turvallinen’, ‘turvattu’, ‘magna cum laude, ‘hyvyys’, ‘hyväntahtoisuus’, ‘etu’, ‘hyöty’],
+            'Cold': ['kylmä', 'kalsea', 'jäähtynyt', 'jäähdyttävä', 'kolea', 'jäätävä', 'jääkylmä', 'hyinen',
+                     'tunteeton',
+                     'kylmäverinen', 'epäinhimillinen', 'rakkaudeton', 'ynseä', 'frigidi', 'piittaamaton',
+                     'välinpitämätön', 'turta',
+                     'sydämetön', 'häikäilemätön', 'kylmyys', 'alhainen lämpötila', 'viileys'],
 
-‘Cold’: [‘kylmä’, ‘kalsea’, ‘jäähtynyt’, ‘jäähdyttävä’, ‘kolea’, ‘jäätävä’, ‘jääkylmä’, ‘hyinen’, ‘tunteeton’, ‘kylmäverinen’, ‘epäinhimillinen’, ‘rakkaudeton’, ‘ynseä’, ‘frigidi’, ‘piittaamaton’, ‘välinpitämätön’, ‘turta’, ‘sydämetön’, ‘häikäilemätön’, ‘kylmyys’, ‘alhainen lämpötila’, ‘viileys’],
+            'Hot': ['kuuma', 'polttava', 'palava', 'tulinen', 'intohimoinen', 'kiivas'],
 
-‘Hot’: [‘kuuma’, ‘polttava’, ‘palava’, ‘tulinen’, ‘intohimoinen’, ‘kiivas’],
+            'Complex': ['monimutkainen', 'hämärä', 'vaikeatajuinen', 'vaikeaselkoinen', 'mutkikas', 'sekava', 'vaikea',
+                        'visainen'],
 
-‘Complex’: [‘monimutkainen ‘, ‘hämärä’, ‘vaikeatajuinen’, ‘vaikeaselkoinen’, ‘mutkikas’, ‘sekava’, ‘vaikea’, ‘visainen’],
+            'Simple': ['yksinkertainen', 'alkukantainen', 'helppo', 'mutkaton', 'ongelmaton', 'alkeellinen',
+                       'vähäpätöinen',
+                       'rahvas', 'suoraviivainen', 'yksinkertainen ihminen'],
 
-‘Simple’: [‘yksinkertainen’, ‘alkukantainen’, ‘helppo’, ‘mutkaton’, ‘ongelmaton’, ‘alkeellinen’,  ‘vähäpätöinen’, ‘rahvas’, ‘suoraviivainen’, ‘yksinkertainen ihminen’],
+            'Cowardly': ['raukkamainen', 'pelokas', 'pelkurimainen'],
 
-‘Cowardly’: [‘raukkamainen’, ‘pelokas’, ‘pelkurimainen’],
+            'Brave': ['urhea', 'rohkea', 'uskalias', 'peloton', 'huimapäinen', 'vahva', 'luotettava', 'urhoollinen'],
 
-‘Brave’: [‘urhea ‘, ‘rohkea’, ‘uskalias’, ‘peloton’, ‘huimapäinen’, ‘vahva’, ‘luotettava’, ‘urhoollinen’],
+            'Dangerous': ['vaarallinen', 'tuhoisa', 'vakava', 'ankara', 'hengenvaarallinen', 'turvaton', 'uhka',
+                          'riski',
+                          'riskialtis', 'uhkarohkea', 'riskaabeli', 'riskipitoinen'],
 
-‘Dangerous’: [‘vaarallinen’, ‘tuhoisa’, ‘vakava’, ‘ankara’, ‘hengenvaarallinen’, ‘turvaton’, ‘uhka‘, ‘riski‘, ‘riskialtis’, ‘uhkarohkea’, ‘riskaabeli’, ‘riskipitoinen’],
+            'Secure': ['turvallinen', 'suojaisa', 'tallessa', 'luotettava', 'riskitön', 'varma', 'turvattu',
+                       'hyökkäykseen sopimaton', 'kestävä'],
 
-‘Secure’: [‘turvallinen’, ‘suojaisa’, ‘tallessa’, ‘luotettava’, ‘riskitön’, ‘varma’, ‘turvattu’, ‘hyökkäykseen sopimaton’, ‘kestävä’],
+            'Dark': ['tumma', 'tummaihoinen', 'ei-valkoinen', 'ruskeanharmaa', 'mustahko', 'synkkä', 'väriltään tumma'],
 
-‘Dark’: [‘tumma’, ‘tummaihoinen’, ‘ei-valkoinen’, ‘ruskeanharmaa’, ‘mustahko’, ‘synkkä’, ‘väriltään tumma’],
+            'Luminous': ['valoisa', 'kirkas'],
 
-‘Luminous’: [‘valoisa ‘, ‘kirkas’],
+            'Difficult': ['vaikea', 'hankala', 'mutkikas', 'kiusallinen', 'vaarallinen', 'haastava', 'vaativa',
+                          'työläs',
+                          'hämmentävä', 'visainen', 'ongelmallinen', 'pulmallinen', 'kova', 'raskas', 'problemaattinen',
+                          'rasittava', 'painava', 'monitavuinen', 'monimutkainen', 'vaikeatajuinen', 'sekava',
+                          'epämukava'],
 
-‘Difficult’: [‘vaikea’, ‘hankala’, ‘mutkikas’, ‘kiusallinen’, ‘vaarallinen’, ‘haastava’, ‘vaativa’, ‘työläs’, ‘hämmentävä’, ‘visainen’, ‘ongelmallinen’, ‘pulmallinen’, ‘kova’, ‘raskas’, ‘problemaattinen’, ‘rasittava’, ‘painava’, ‘monitavuinen’, ‘monimutkainen’, ‘vaikeatajuinen’, ‘sekava’, ‘epämukava’],
+            'Easy': ['helppo', 'vaivaton', 'mukava', 'yksinkertainen', 'mutkaton', 'ongelmaton'],
 
-‘Easy’: [‘helppo’, ‘vaivaton’, ‘mukava’, ‘yksinkertainen’, ‘mutkaton’, ‘ongelmaton’],
+            'Evil': ['paha', 'ikävä', 'vahingollinen', 'pahansuopa', 'ilkeä', 'julma', 'pahantahtoinen', 'huono',
+                     'karhea',
+                     'tuhoisa', 'ankara', 'hengenvaarallinen', 'tiukka', 'hankala', 'hirvittävä', 'hirmuinen', 'hirveä',
+                     'paheellinen', 'inhottava', 'katala', 'kauhea', 'häijy', 'kamala', 'syntinen', 'jumalaton',
+                     'epämoraalinen',
+                     'pahuus'],
 
-‘Evil’: [‘paha’, ‘ikävä’, ‘vahingollinen’, ‘pahansuopa’, ‘ilkeä’, ‘julma’, ‘pahantahtoinen’, ‘huono’, ‘karhea’, ‘tuhoisa’, ‘ankara’, ‘hengenvaarallinen’, ‘tiukka’, ‘hankala’, ‘hirvittävä’, ‘hirmuinen’, ‘hirveä’, ‘paheellinen’, ‘inhottava’, ‘katala’, ‘kauhea’, ‘häijy’, ‘kamala’, ‘syntinen’, ‘jumalaton’, ‘epämoraalinen’, ‘pahuus’],
+            'Benign': ['hyvänlaatuinen', 'laatu', 'laadukkuus', 'hyvälaatuinen', 'laadukas'],
 
-‘Benign’: [‘hyvänlaatuinen’, ‘laatu’, ‘laadukkuus’, ‘hyvälaatuinen’, ‘laadukas’],
+            'Faded': ['haalistuneet', 'kalpea', 'himmeä'],
 
-‘Faded’ : [‘haalistuneet’, ‘kalpea’, ‘himmeä’],
+            'Bright': ['kirkas', 'valoisa', 'loistava', 'säteilevä', 'hohtava', 'leimuava', 'häikäisevä', 'sokaiseva',
+                       'sokaisevan kirkas', 'välkkyvä', 'räikeä', 'kirkasvärinen', 'kristallinkirkas', 'seesteinen'],
 
-‘Bright’: [‘kirkas’, ‘valoisa’, ‘loistava’, ‘säteilevä’, ‘hohtava’, ‘leimuava’, ‘häikäisevä’, ‘sokaiseva’, ‘sokaisevan kirkas’, ‘välkkyvä’, ‘räikeä’, ‘kirkasvärinen’, ‘kristallinkirkas’, ‘seesteinen’],
+            'Feeble': ['voimaton', 'heikko', 'kykenemätön', 'avuton', 'raihnainen', 'tutiseva', 'heiveröinen', 'hauras',
+                       'veltto'],
 
-‘Feeble’: [‘voimaton’, ‘heikko’, ‘kykenemätön’, ‘avuton’, ‘raihnainen’, ‘tutiseva’, ‘heiveröinen’, ‘hauras’, ‘veltto’],
+            'Strong': ['vahva', 'rohkea', 'luotettava', 'urhea', 'vankka', 'tukeva', 'väkevä', 'lihaksikas', 'voimakas',
+                       'jykevä',
+                       'roteva', 'jämerä', 'kestävä', 'vanttera', 'hyökkäykseen sopimaton'],
 
-‘Strong’: [‘vahva’, ‘rohkea’, ‘luotettava’, ‘urhea’, ‘vankka’, ‘tukeva’, ‘väkevä’, ‘lihaksikas’, ‘voimakas’, ‘jykevä’, ‘roteva’, ‘jämerä’, ‘kestävä’, ‘vanttera’, ‘hyökkäykseen sopimaton’],
+            'Masculine': ['maskuliini', 'masculine'],
 
-‘Masculine’: [‘maskuliini’, ‘masculine’],
+            'Feminine': ['naisellinen', 'naismainen', 'naisen', 'feminiininen'],
 
-‘Feminine’: [‘naisellinen’, ‘naismainen’, ‘naisen’, ‘feminiininen’],
+            'Passive': ['passiivinen', 'toimeton', 'alistuva', 'rauhanomainen'],
 
-‘Passive’: [‘passiivinen’, ‘toimeton’, ‘alistuva’, ‘rauhanomainen’],
+            'Active': ['aktiivinen', 'toimelias', 'yritteliäs', 'toimiva', 'osallistuva', 'aktiivi', 'taisteluvalmis',
+                       'taisteleva'],
 
-‘Active’: [‘aktiivinen’, ‘toimelias’, ‘yritteliäs’, ‘toimiva’, ‘osallistuva’, ‘aktiivi‘, ‘taisteluvalmis’, ‘taisteleva’],
+            'Quiet': ['hiljainen', 'ääneen lausumaton', 'sanaton', 'äänetön', 'vaitelias', 'vaitonainen', 'vaiti oleva',
+                      'vaiti',
+                      'tyyni'],
 
-‘Quiet’: [‘hiljainen’, ‘‘ääneen lausumaton’, ‘sanaton’, ‘äänetön’, ‘vaitelias’, ‘vaitonainen’, ‘vaiti oleva’, ‘vaiti’, ‘tyyni’],
+            'Loud': ['äänekäs', 'kovaääninen', 'meluisa'],
 
-‘Loud’: [‘äänekäs’, ‘kovaääninen’, ‘meluisa’],
+            'Rough': ['karkea', 'karu', 'tyly', 'räikeä', 'huutava', 'törkeä', 'töykeä', 'huonotapainen',
+                      'epäkohtelias',
+                      'hiomaton', 'karhea', 'kova', 'ankara', 'julma', 'sivistymätön', 'röyhkeä', 'epätasainen',
+                      'rosoinen',
+                      'takkuinen'],
 
-‘Rough’: [‘karkea’, ‘karu’, ‘tyly’, ‘räikeä’, ‘huutava’, ‘törkeä’, ‘töykeä’, ‘huonotapainen’, ‘epäkohtelias’, ‘hiomaton’, ‘karhea’, ‘kova’, ‘ankara’, ‘julma’, ‘sivistymätön’, ‘röyhkeä’,  ‘epätasainen’, ‘rosoinen’, ‘takkuinen’],
+            'Tender': ['hellä', 'helläkätinen', 'lempeä', 'hellävarainen', 'pehmeä', 'rakastava', 'herkkä', 'arka'],
 
-‘Tender’: [‘hellä’, ‘helläkätinen’, ‘lempeä’, ‘hellävarainen’, ‘pehmeä’, ‘rakastava’, ‘herkkä’, ‘arka’],
+            'Sad': ['surullinen', 'alakuloinen', 'apea', 'surumielinen', 'synkkä', 'pimeä', 'ankea', 'kolkko', 'iloton',
+                    'synkkämielinen', 'surkea', 'masentava', 'synkeä', 'valitettava', 'onneton', 'tyytymätön',
+                    'masentunut',
+                    'haikea', 'sureva', 'menettänyt', 'murheellinen'],
 
-‘Sad’: [‘surullinen’, ‘alakuloinen’, ‘apea’, ‘surumielinen’, ‘synkkä’, ‘pimeä’, ‘ankea’, ‘kolkko’, ‘iloton’, ‘synkkämielinen’, ‘surkea’, ‘masentava’, ‘synkeä’, ‘valitettava’, ‘onneton’, ‘tyytymätön’, ‘masentunut’, ‘haikea’, ’sureva’, ‘menettänyt’, ‘murheellinen’],
+            'Joyful': ['iloinen', 'hilpeä', 'säteilevä', 'hyvillään', 'mielissään oleva', 'mielissään', 'aurinkoinen',
+                       'eläväinen',
+                       'onnellinen', 'ihastunut', 'ilahtunut', 'haltioitunut', 'ilahduttava', 'onnekas', 'tyytyväinen',
+                       'riemukas',
+                       'haltioissaan oleva', 'riemuisa', 'hauska', 'iloluontoinen', 'joviaali', 'optimistinen',
+                       'myönteinen',
+                       'hyvinvointi', 'onnellisuus'],
 
-‘Joyful’: [‘iloinen’, ‘hilpeä’, ‘säteilevä’, ‘hyvillään’, ‘mielissään oleva’, ‘mielissään’, ‘aurinkoinen’, ‘eläväinen’, ‘onnellinen’, ‘ihastunut’, ‘ilahtunut’, ‘haltioitunut’, ‘ilahduttava’, ‘onnekas’, ‘tyytyväinen’, ‘riemukas’, ‘haltioissaan oleva’, ‘riemuisa’, ‘hauska’, ‘iloluontoinen’, ‘joviaali’, ‘optimistinen’, ‘myönteinen’, ‘hyvinvointi’, ‘onnellisuus’],
+            'Short': ['lyhyt', 'suppea', 'tiivis', 'ytimekäs', 'kompakti', 'tiivistetty', 'lyhennetty', 'pätkä',
+                      'lyhytaikainen',
+                      'pieni', 'pienikokoinen', 'pikkuruinen', 'pätkä'],
 
-‘Short’: [‘lyhyt’, ‘suppea’, ‘tiivis’, ‘ytimekäs’, ‘kompakti’, ‘tiivistetty’, ‘lyhennetty’, ‘pätkä’, ‘lyhytaikainen’, ‘pieni’, ‘pienikokoinen’, ‘pikkuruinen’, ‘pätkä’],
+            'Long': ['pitkä', 'pitkulainen', 'pitkänomainen', 'pidennetty', 'venytetty', 'kestävä', 'korkea', 'kookas'],
 
-‘Long’: [‘pitkä’, ‘pitkulainen’, ‘pitkänomainen’, ‘pidennetty’, ‘venytetty’, ‘kestävä’, ‘korkea’, ‘kookas’],
+            'Slow': ['hidas', 'hiljainen', 'verkkainen', 'typerä', 'hidasälyinen', 'tyhmä', 'hidasjärkinen',
+                     'hidasteleva',
+                     'hidasjuoksuinen', 'hidasliikkeinen'],
 
-‘Slow’: [‘hidas’, ‘hiljainen’, ‘verkkainen’, ‘typerä’, ‘hidasälyinen’, ‘tyhmä’, ‘hidasjärkinen’, ‘hidasteleva’, ‘hidasjuoksuinen’, ‘hidasliikkeinen’],
+            'Quick': ['nopea', 'ripeä', 'reipas', 'vilkas', 'pika', 'vikkelä', 'nopeakäyntinen', 'suurnopeus',
+                      'pikainen',
+                      'vauhdikas', 'hätiköity', 'äkillinen', 'hätäinen', 'ketterä', 'terävä', 'nokkela'],
 
-‘Quick’: [‘nopea’, ‘ripeä’, ‘reipas’, ‘vilkas’, ‘pika‘, ‘vikkelä’, ‘nopeakäyntinen’, ‘suurnopeus‘, ‘pikainen’, ‘vauhdikas’, ‘hätiköity’, ‘äkillinen’, ‘hätäinen’, ‘ketterä’, ‘terävä’, ‘nokkela’],
+            'Small': ['pieni', 'diminutiivinen', 'lilliputti', 'kääpiö', 'pikkuinen', 'pikkuruinen', 'lilliputtimainen',
+                      'mitätön',
+                      'pikku', 'vähäinen', 'vähäpätöinen', 'vaatimaton', 'pienimuotoinen', 'suppea', 'taskukokoinen',
+                      'pikku',
+                      'pienillä kirjaimilla kirjoitettu', 'hyvin pieni', 'olematon', 'pienen', 'pieni', 'alhainen',
+                      'lyhyt'],
 
-‘Small’: [‘pieni’, ‘diminutiivinen’, ‘lilliputti‘, ‘kääpiö‘, ‘pikkuinen’, ‘pikkuruinen’, ‘lilliputtimainen’, ‘mitätön’, ‘pikku’, ‘vähäinen’, ‘vähäpätöinen’, ‘vaatimaton’, ‘pienimuotoinen’, ‘suppea’, ‘taskukokoinen’, ‘pikku’, ‘pienillä kirjaimilla kirjoitettu’, ‘hyvin pieni’, ‘olematon’, ‘pienen’, ‘pieni’, ‘alhainen’, ‘lyhyt’],
+            'Big': ['iso', 'suuri', 'kookas', 'massiivinen', 'suunnaton', 'valtava', 'isokokoinen', 'jättimäinen',
+                    'isot',
+                    'suuraakkos', 'aikuinen', 'täysikasvuinen'],
 
-‘Big’: [‘iso’, ‘suuri’, ‘kookas’, ‘massiivinen’, ‘suunnaton’, ‘valtava’, ‘isokokoinen’, ‘jättimäinen’, ‘isot’, ‘suuraakkos‘, ‘aikuinen’, ‘täysikasvuinen’],
+            'Smooth': ['sileäl', 'kalju'],
 
-‘Smooth’: [‘sileäl’, ‘kalju’],
+            'Rough_or_not_smooth': ['epätasainen', 'rosoinen', 'hajanainen', 'mäkinen', 'lovettu', 'hammastettu',
+                                    'särmikäs'],
 
-‘Rough_or_not_smooth’: [‘epätasainen’, ‘rosoinen’, ‘hajanainen’, ‘mäkinen’, ‘lovettu’, ‘hammastettu’, ‘särmikäs’],
+            'Ugly': ['ruma', 'epäesteettinen', 'epämiellyttävä', 'törkyinen', 'likainen', 'rivo', 'kömpelö', 'suloton',
+                     'tökerö'],
 
-‘Ugly’: [‘ruma’, ‘epäesteettinen’, ‘epämiellyttävä’, ‘törkyinen’, ‘likainen’, ‘rivo’, ‘kömpelö’, ‘suloton’, ‘tökerö’],
-
-‘Beautiful’: [‘kaunis’, ‘ihana’, ‘loistava’, ‘sievä’, ‘hauskannäköinen’, ‘viehkeä’, ‘komea’, ‘nätti’, ‘soma’, ‘viehättävä’, ‘hyvännäköinen’],
-
+            'Beautiful': ['kaunis', 'ihana', 'loistava', 'sievä', 'hauskannäköinen', 'viehkeä', 'komea', 'nätti',
+                          'soma',
+                          'viehättävä', 'hyvännäköinen']}
