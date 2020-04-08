@@ -1,0 +1,50 @@
+from peewee import *
+from datetime import date
+
+db = SqliteDatabase('fitness.db')
+
+
+class Client(Model):
+    name = CharField()
+    date_of_birth = DateField()
+    gender = CharField()
+    abonement = IntegerField()
+    phone_number = IntegerField()
+    email = CharField()
+    passport = CharField()
+
+
+class Staff(Model):
+    name = CharField()
+    date_of_birth = DateField()
+    gender = CharField()
+    start_day = DateField()
+    salary = FloatField()
+    phone_number = IntegerField()
+    email = CharField()
+    equipment = IntegerField()
+
+
+class Equipment(Model):
+    number = IntegerField()
+    date_of_purchase = DateField()
+    place = CharField()
+
+
+class Abonement(Model):
+    number = IntegerField()
+    start_day = DateField()
+    end_day = DateField()
+    status = CharField()
+
+
+class Schedule(Model):
+    coach_name = CharField()
+    client_name = CharField()
+    date = DateField()
+    time = TimeField()
+    price = IntegerField()
+
+# client1 = Client(name='Темченко Тимофей Анатолиевич', date_of_birth=date(1960, 1, 15), gender='мужской',
+#                  abonement='0000000001', phone_number='89123456789', email='temchenko@gmail.com')
+# client1.save()
