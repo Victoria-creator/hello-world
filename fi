@@ -282,6 +282,184 @@ with open("fi_axis.pkl", "rb") as out_file:
 #           'ey', 'e', 'ɑɑ', 'ɑu', 'ɑi', 'ɑ', 'øø', 'øi', 'øy', 'ø', 'ææ', 'æi', 'æy', 'æ', 'yy', 'yi', 'yø', 'y', 'uu',
 #           'ui', 'uo', 'u']
 #
+
+# phones = []
+#
+# i = 0
+# for item in word2trans.items():
+#     transcription = item[1]
+#     phones = []
+#     while i < len(transcription):
+#         char = transcription[i]
+#         # print(char)
+#         if char in 'bdfghjqrvwxzšå':
+#             phones.append(char)
+#             i += 1
+#         elif char == 'k':
+#             if transcription[i + 1] == 'k':
+#                 phones.append('kk')
+#                 i += 2
+#             else:
+#                 phones.append('k')
+#                 i += 1
+#         elif char == 't':
+#             if transcription[i + 1] == 't':
+#                 phones.append('tt')
+#                 i += 2
+#             else:
+#                 phones.append('t')
+#                 i += 1
+#         elif char == 's':
+#             if transcription[i + 1] == 's':
+#                 phones.append('ss')
+#                 i += 2
+#             else:
+#                 phones.append('s')
+#                 i += 1
+#         elif char == 'm':
+#             if transcription[i + 1] == 'm':
+#                 phones.append('mm')
+#                 i += 2
+#             else:
+#                 phones.append('m')
+#                 i += 1
+#         elif char == 'l':
+#             if transcription[i + 1] == 'l':
+#                 phones.append('ll')
+#                 i += 2
+#             else:
+#                 phones.append('l')
+#                 i += 1
+#         elif char == 'n':
+#             if transcription[i + 1] == 'n':
+#                 phones.append('nn')
+#                 i += 2
+#             else:
+#                 phones.append('n')
+#                 i += 1
+#         elif char == 'p':
+#             if transcription[i + 1] == 'p':
+#                 phones.append('pp')
+#                 i += 2
+#             else:
+#                 phones.append('p')
+#                 i += 1
+#         elif char == 'i':
+#             if transcription[i + 1] == 'i':
+#                 phones.append('ii')
+#                 i += 2
+#             elif transcription[i + 1] == 'e':
+#                 phones.append('ie')
+#                 i += 2
+#             elif transcription[i + 1] == 'u':
+#                 phones.append('iu')
+#                 i += 2
+#             elif transcription[i + 1] == 'y':
+#                 phones.append('iy')
+#                 i += 2
+#             else:
+#                 phones.append('i')
+#                 i += 1
+#         elif char == 'o':
+#             if transcription[i + 1] == 'i':
+#                 phones.append('oi')
+#                 i += 2
+#             elif transcription[i + 1] == 'u':
+#                 phones.append('ou')
+#                 i += 2
+#             elif transcription[i + 1] == 'o':
+#                 phones.append('oo')
+#                 i += 2
+#             else:
+#                 phones.append('o')
+#                 i += 1
+#         elif char == 'e':
+#             if transcription[i + 1] == 'e':
+#                 phones.append('ee')
+#                 i += 2
+#             elif transcription[i + 1] == 'u':
+#                 phones.append('eu')
+#                 i += 2
+#             elif transcription[i + 1] == 'y':
+#                 phones.append('ey')
+#                 i += 2
+#             elif transcription[i + 1] == 'i':
+#                 phones.append('ei')
+#                 i += 2
+#             else:
+#                 phones.append('e')
+#                 i += 1
+#         elif char == 'ɑ':
+#             if transcription[i + 1] == 'ɑ':
+#                 phones.append('ɑɑ')
+#                 i += 2
+#             elif transcription[i + 1] == 'u':
+#                 phones.append('ɑu')
+#                 i += 2
+#             elif transcription[i + 1] == 'i':
+#                 phones.append('ɑi')
+#                 i += 2
+#             else:
+#                 phones.append('ɑ')
+#                 i += 1
+#         elif char == 'y':
+#             if transcription[i + 1] == 'y':
+#                 phones.append('yy')
+#                 i += 2
+#             elif transcription[i + 1] == 'ø':
+#                 phones.append('yø')
+#                 i += 2
+#             elif transcription[i + 1] == 'i':
+#                 phones.append('yi')
+#                 i += 2
+#             else:
+#                 phones.append('y')
+#                 i += 1
+#         elif char == 'u':
+#             if transcription[i + 1] == 'u':
+#                 phones.append('uu')
+#                 i += 2
+#             elif transcription[i + 1] == 'o':
+#                 phones.append('uo')
+#                 i += 2
+#             elif transcription[i + 1] == 'i':
+#                 phones.append('ui')
+#                 i += 2
+#             else:
+#                 phones.append('u')
+#                 i += 1
+#         elif char == 'ø':
+#             if transcription[i + 1] == 'ø':
+#                 phones.append('øø')
+#                 i += 2
+#             elif transcription[i + 1] == 'y':
+#                 phones.append('øy')
+#                 i += 2
+#             elif transcription[i + 1] == 'i':
+#                 phones.append('øi')
+#                 i += 2
+#             else:
+#                 phones.append('ø')
+#                 i += 1
+#         elif char == 'æ':
+#             if transcription[i + 1] == 'æ':
+#                 phones.append('ææ')
+#                 i += 2
+#             elif transcription[i + 1] == 'y':
+#                 phones.append('æy')
+#                 i += 2
+#             elif transcription[i + 1] == 'i':
+#                 phones.append('æi')
+#                 i += 2
+#             else:
+#                 phones.append('æ')
+#                 i += 1
+#         else:
+#             print(char)
+#             i += 1
+#
+
+
 # with open("fi_sounds.pkl", "wb") as out_file:
 #     pickle.dump(sounds, out_file, protocol=pickle.HIGHEST_PROTOCOL)
 
@@ -383,9 +561,10 @@ with open('results.csv', 'w', newline='') as csv_file:
             else:
                 f_w_s = '{:.4}'.format(f_w)
 
-            if f_w > 0.01 and wo_f < 0.001 and w_wo < 0.001 and \
-                    ((np.mean(first_sound) > np.mean(without_sound) and np.mean(with_sound) > np.mean(without_sound)) or
-                     (np.mean(first_sound) < np.mean(without_sound) and np.mean(with_sound) < np.mean(without_sound))):
+            if (wo_f < 0.001 or w_wo < 0.001) and ((np.mean(first_sound) > np.mean(without_sound)
+                                                    and np.mean(with_sound) > np.mean(without_sound))
+                                                   or (np.mean(first_sound) < np.mean(without_sound)
+                                                       and np.mean(with_sound) < np.mean(without_sound))):
                 print('{} - {} p-values: {:.4} {:.4} {:.4}'.format(phone, axes_name, f_w, wo_f, w_wo))
                 plt.hist(first_sound, 100, alpha=0.5, label='first')
                 plt.hist(with_sound, 100, alpha=0.5, label='with')
