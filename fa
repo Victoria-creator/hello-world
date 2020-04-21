@@ -366,9 +366,10 @@ with open('results.csv', 'w', newline='') as csv_file:
             else:
                 f_w_s = '{:.4}'.format(f_w)
 
-            if f_w > 0.01 and wo_f < 0.001 and w_wo < 0.001 and \
-                    ((np.mean(first_sound) > np.mean(without_sound) and np.mean(with_sound) > np.mean(without_sound)) or
-                     (np.mean(first_sound) < np.mean(without_sound) and np.mean(with_sound) < np.mean(without_sound))):
+            if (wo_f < 0.001 or w_wo < 0.001) and ((np.mean(first_sound) > np.mean(without_sound)
+                                                    and np.mean(with_sound) > np.mean(without_sound))
+                                                   or (np.mean(first_sound) < np.mean(without_sound)
+                                                       and np.mean(with_sound) < np.mean(without_sound))):
                 print('{} - {} p-values: {:.4} {:.4} {:.4}'.format(phone, axes_name, f_w, wo_f, w_wo))
                 plt.hist(first_sound, 100, alpha=0.5, label='first')
                 plt.hist(with_sound, 100, alpha=0.5, label='with')
